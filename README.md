@@ -1,6 +1,6 @@
 # Chatroom
 
-This repository demonstrates basic server-client communication where multiple clients connect to a server and exchange messages in real-time.
+This repository demonstrates basic server-client communication where multiple clients connect to a server and exchange messages.
 
 ## Requirements
 
