@@ -1,10 +1,6 @@
 # Chatroom
 
-A simple chatroom using Java's socket programming. This project demonstrates basic server-client communication where multiple clients can connect to the server and exchange messages in real-time.
-
-## Overview
-
-The chatroom consists of a server and multiple clients. The server listens for incoming client connections and broadcasts messages received from any client to all connected clients. The clients connect to the server, send messages, and receive messages from other clients.
+This repository demonstrates basic server-client communication where multiple clients can connect to the server and exchange messages in real-time.
 
 ## Requirements
 
