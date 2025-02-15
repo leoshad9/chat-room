@@ -19,6 +19,13 @@ public class Client {
             // Read the server's request for the client's name
             System.out.println(in.readLine()); // Server's prompt for name
             clientName = userInput.readLine(); // User enters their name
+
+            // Input validation for client name
+            if (!isValidName(clientName)) {
+                System.out.println("Invalid name. Please restart the client and enter a valid name.");
+                return; // Exit if the name is invalid
+            }
+
             out.println(clientName); // Send name to the server
 
             // Start a new thread to read messages from the server
@@ -29,19 +36,29 @@ public class Client {
                         System.out.println(serverMessage); // Display received messages
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.err.println("Error reading from server: " + e.getMessage());
                 }
             }).start();
 
             // Main thread to read input from the user and send it to the server
             String userMessage;
             while ((userMessage = userInput.readLine()) != null) {
+                if (userMessage.equalsIgnoreCase("exit")) { // Check for exit command
+                    System.out.println("Exiting chat...");
+                    break; // Exit the loop
+                }
                 // Prepend the client's name to the message
                 out.println(clientName + ": " + userMessage); // Send user input to the server
             }
 
         } catch (IOException e) {
-            e.printStackTrace(); // Print stack trace in case of an error
+            System.err.println("Connection error: " + e.getMessage()); // Print error message
         }
+    }
+
+    // Method to validate the client's name
+    private static boolean isValidName(String name) {
+        // Simple regex to allow only alphanumeric characters and underscores
+        return name != null && name.matches("^[a-zA-Z0-9_]+$");
     }
 }

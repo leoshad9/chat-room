@@ -45,6 +45,13 @@ public class Server {
                 // Ask the client for their name
                 out.println("Enter your name:");
                 clientName = in.readLine(); // Read client's name
+
+                // Input validation for client name
+                if (!isValidName(clientName)) {
+                    out.println("Invalid name. Please restart the client and enter a valid name.");
+                    return; // Exit if the name is invalid
+                }
+
                 System.out.println(clientName + " connected from " + clientAddress);
 
                 synchronized (clientHandlers) {
@@ -63,17 +70,23 @@ public class Server {
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace(); // Print stack trace in case of an error
+                System.err.println("Error handling client " + clientName + ": " + e.getMessage());
             } finally {
                 try {
                     socket.close(); // Close the client socket
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.err.println("Error closing socket for client " + clientName + ": " + e.getMessage());
                 }
                 synchronized (clientHandlers) {
                     clientHandlers.remove(this); // Remove this client from the set
                 }
             }
+        }
+
+        // Method to validate the client's name
+        private boolean isValidName(String name) {
+            // Simple regex to allow only alphanumeric characters and underscores
+            return name != null && name.matches("^[a-zA-Z0-9_]+$");
         }
     }
 }
