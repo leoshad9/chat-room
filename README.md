@@ -1,4 +1,4 @@
-# Chatroom
+# Multithreaded Chat Server
 
 This repository demonstrates basic server-client communication where multiple clients connect to a server and exchange messages.
 
