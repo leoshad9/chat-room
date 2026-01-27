@@ -1,6 +1,15 @@
 # Multithreaded Chat Server
 
-This repository demonstrates basic server-client communication where multiple clients connect to a server and exchange messages.
+A production-ready multithreaded chat server built with Java socket programming. Implements concurrent client connection handling using TCP/IP protocol with thread-safe message broadcasting to all connected clients.
+
+## Features
+
+- **Multithreaded Architecture**: Each client connection runs on a separate thread for concurrent handling
+- **TCP/IP Socket Communication**: Reliable message delivery using Java ServerSocket and Socket APIs
+- **Real-time Broadcasting**: Messages are instantly broadcast to all connected clients
+- **Thread-Safe Operations**: Synchronized message handling prevents race conditions
+- **Error Handling**: Robust exception handling and graceful client disconnection
+- **Scalable Design**: Supports multiple simultaneous client connections
 
 ## Requirements
 
@@ -13,6 +22,22 @@ This repository demonstrates basic server-client communication where multiple cl
 - `Client.java`: The client-side code that connects to the server and sends/receives messages.
 
 ## Running the Application
+
+## Technical Details
+
+- **Port**: 5555 (configurable)
+- **Protocol**: TCP/IP
+- **Threading Model**: One thread per client connection
+- **Message Format**: Plain text
+- **Connection Management**: Automatic cleanup on client disconnect
+
+## Architecture
+
+The server uses a multi-threaded model where:
+1. Main thread listens for incoming connections on ServerSocket
+2. Each accepted client spawns a new ClientHandler thread
+3. ClientHandler threads manage individual client I/O operations
+4. Messages are broadcast to all connected clients using thread-safe collections
 
 ### 1. Compile the Code
 
